@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "Squares.h"
 #include <vector>
+#include "TitleScreen.h"
 
 class Game
 {
@@ -45,6 +46,7 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+	DrawingBoard brd;
 	/********************************/
 	/*  User Variables              */
 	bool IsComputerTurn = true;

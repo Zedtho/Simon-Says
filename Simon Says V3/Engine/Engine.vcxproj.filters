@@ -51,6 +51,9 @@
     <ClInclude Include="Squares.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TitleScreen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">

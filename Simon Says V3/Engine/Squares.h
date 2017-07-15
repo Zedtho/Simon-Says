@@ -37,11 +37,8 @@ public:
 		int AbsoluteYTop = AxisY + VerticalTop;
 		int AbsoluteYBottom = AxisY + VerticalBottom;
 		
-		if (AbsoluteXLeft < wnd.mouse.GetPosX() && wnd.mouse.GetPosX() < AbsoluteXRight && AbsoluteYTop < wnd.mouse.GetPosY() && wnd.mouse.GetPosY() < AbsoluteYBottom && wnd.mouse.LeftIsPressed())
-		{
-			return true;
-		}
-		return false;
+		return (AbsoluteXLeft < wnd.mouse.GetPosX() && wnd.mouse.GetPosX() < AbsoluteXRight && AbsoluteYTop < wnd.mouse.GetPosY() && wnd.mouse.GetPosY() < AbsoluteYBottom && wnd.mouse.LeftIsPressed());
+
 	}
 };
 

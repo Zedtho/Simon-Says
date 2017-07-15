@@ -54,6 +54,7 @@ void Game::UpdateModel()
 			SetColor(YellowBottomLeft, 255, 255, 0);
 			SetColor(GreenBottomRight, 0, 255, 0);
 		}
+		
 	}
 	else
 	{
@@ -90,44 +91,43 @@ void Game::UpdateModel()
 			if (UserInput.size() != ColorPattern.size())
 			{
 				
-				if (wnd.mouse.GetPosX() < AxisX && wnd.mouse.GetPosX() > AxisX + RedTopLeft.HorizontalLeft && wnd.mouse.GetPosY() < AxisY && wnd.mouse.GetPosY() > AxisY + RedTopLeft.VerticalTop && wnd.mouse.LeftIsPressed() && TimeOutForSetColor == 0)
+				if (RedTopLeft.IsSelected(AxisX, AxisY, wnd)&& TimeOutForSetColor == 0)
 				{
 					UserInput.push_back(1);
 					SetColor(RedTopLeft, 255, 150, 150);
-					TimeOutForSetColor = 15;
+					TimeOutForSetColor = 7;
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
 						ColorPattern.clear();
 					}
 				}
-				if (wnd.mouse.GetPosX() > AxisX && wnd.mouse.GetPosX() < AxisX + BlueTopRight.HorizontalRight && wnd.mouse.GetPosY() < AxisY && wnd.mouse.GetPosY() > AxisY + BlueTopRight.VerticalTop && wnd.mouse.LeftIsPressed() && TimeOutForSetColor == 0 )
-				{
+				if (BlueTopRight.IsSelected(AxisX, AxisY, wnd) && TimeOutForSetColor == 0 )				{
 					UserInput.push_back(2);
 					SetColor(BlueTopRight, 150, 150, 255);
-					TimeOutForSetColor = 15;
+					TimeOutForSetColor = 7;
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
 						ColorPattern.clear();
 					}
 				}
-				if (wnd.mouse.GetPosX() > YellowBottomLeft.HorizontalLeft + AxisX && wnd.mouse.GetPosX() < AxisX && wnd.mouse.GetPosY() > AxisY && wnd.mouse.GetPosY() < AxisY + YellowBottomLeft.VerticalBottom && wnd.mouse.LeftIsPressed() && TimeOutForSetColor == 0)
+				if (YellowBottomLeft.IsSelected(AxisX, AxisY, wnd) && TimeOutForSetColor == 0)
 				{
 					UserInput.push_back(3);
 					SetColor(YellowBottomLeft, 255, 255, 150);
-					TimeOutForSetColor = 15;
+					TimeOutForSetColor = 7;
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
 						ColorPattern.clear();
 					}
 				}
-				if (wnd.mouse.GetPosX() > AxisX && wnd.mouse.GetPosX() < AxisX + GreenBottomRight.HorizontalRight && wnd.mouse.GetPosY() > AxisY && wnd.mouse.GetPosY() < AxisY + GreenBottomRight.VerticalBottom && wnd.mouse.LeftIsPressed() && TimeOutForSetColor == 0)
+				if (GreenBottomRight.IsSelected(AxisX, AxisY, wnd) && TimeOutForSetColor == 0)
 				{
 					UserInput.push_back(4);
 					SetColor(GreenBottomRight, 150, 255, 150);
-					TimeOutForSetColor = 15;
+					TimeOutForSetColor = 7;
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
@@ -158,9 +158,17 @@ void Game::ComposeFrame()
 {
 	if (GameOver)
 	{
-		//Try again next time
+		brd.DrawTitleScreen(gfx);
 	}
-	else {
+	else
+	{
+		if (IsComputerTurn) {
+			brd.DrawWatch(gfx);
+		}
+		else
+		{
+			brd.DrawRepeat(gfx);
+		}
 		RedTopLeft.Draw(AxisX, AxisY, gfx);
 		BlueTopRight.Draw(AxisX, AxisY, gfx);
 		YellowBottomLeft.Draw(AxisX, AxisY, gfx);
