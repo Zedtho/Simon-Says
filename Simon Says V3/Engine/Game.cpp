@@ -30,10 +30,10 @@ Game::Game( MainWindow& wnd )
 	BlueTopRight(0, 0, 255, +5, +150, -5, -150),
 	YellowBottomLeft(255, 255, 0, -150, -5, +150, +5),
 	GreenBottomRight(0, 255, 0, +5, +150, +150, +5),
-	RedButtonSound(L"Square One.wav"),
-	BlueButtonSound(L"Square Two.wav"),
-	YellowButtonSound(L"Square Three.wav"),
-	GreenButtonSound(L"Square Four.wav")
+	RedButtonSound(L"Sound One.wav"),
+	BlueButtonSound(L"Sound Two.wav"),
+	YellowButtonSound(L"Sound Three.wav"),
+	GreenButtonSound(L"Sound Four.wav")
 
 {
 }
@@ -107,7 +107,7 @@ void Game::UpdateModel()
 					UserInput.push_back(1);
 					SetColor(RedTopLeft, 255, 150, 150);
 					TimeOutForSetColor = 5;
-					RedButtonSound.Play();
+					RedButtonSound.Play(1.0f, 4.0f);
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
@@ -170,7 +170,7 @@ void Game::UpdateModel()
 				IsComputerTurn = true;
 				UserInput.clear();
 				TimeOutForSetColor = 25;
-				scrbrd.Score = ColorPattern.size();
+				scrbrd.Score = int(ColorPattern.size());
 				scrbrd.UpdateScoreboard();
 
 			}
@@ -329,7 +329,7 @@ void Game::WhichColor(std::vector<int> ColorPattern)
 	{
 		case 1:
 			SetColor(RedTopLeft, 255, 150, 150);
-			RedButtonSound.Play();
+			RedButtonSound.Play(1.0f, 4.0f);
 			break;
 		case 2:
 			SetColor(BlueTopRight, 150, 150, 255);
