@@ -24,6 +24,8 @@
 #include "Mouse.h"
 #include "Graphics.h"
 #include "Squares.h"
+#include "Scoreboard.h"
+#include "Sound.h"
 #include <vector>
 #include "TitleScreen.h"
 
@@ -47,21 +49,27 @@ private:
 	MainWindow& wnd;
 	Graphics gfx;
 	DrawingBoard brd;
+	Scoreboard scrbrd;
 	/********************************/
 	/*  User Variables              */
 	bool IsComputerTurn = true;
 	bool IsColorAdded = false;
 	bool GameOver = true;
+	bool AfterGameOver = true;
 	std::vector<int> ColorPattern;
 	std::vector<int> UserInput;
 	int TimeOutForSetColor = 0;
 	int IndexForColorPattern= 0;
-	const int AxisX = 400;
-	const int AxisY = 300;
+	const int AxisX = int(Graphics::ScreenWidth / 2);
+	const int AxisY = int(Graphics::ScreenHeight / 2);
 	Square RedTopLeft;
 	Square BlueTopRight;
 	Square YellowBottomLeft;
 	Square GreenBottomRight;
+	Sound RedButtonSound;
+	Sound BlueButtonSound;
+	Sound YellowButtonSound;
+	Sound GreenButtonSound;
 
 	/********************************/
 };

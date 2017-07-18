@@ -1,4 +1,2 @@
-﻿  Game.cpp
-c:\users\pepijn\documents\c++ programs\simon says v3\simon says v3\engine\game.cpp(55): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Engine.vcxproj -> C:\Users\Pepijn\Documents\C++ Programs\Simon Says V3\Simon Says V3\x64\Debug\Engine.exe
-  Engine.vcxproj -> C:\Users\Pepijn\Documents\C++ Programs\Simon Says V3\Simon Says V3\x64\Debug\Engine.pdb (Partial PDB)
+﻿  Engine.vcxproj -> C:\Users\Pepijn\Documents\C++ Programs\Simon Says V3\x64\Debug\Engine.exe
+  Engine.vcxproj -> C:\Users\Pepijn\Documents\C++ Programs\Simon Says V3\x64\Debug\Engine.pdb (Partial PDB)

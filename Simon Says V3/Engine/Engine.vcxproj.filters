@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8b6c92a8-f65d-451e-80e3-d65773602b92}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Media">
+      <UniqueIdentifier>{315ab119-ea26-4454-8237-52775e83f0d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChiliWin.h">
@@ -54,6 +57,15 @@
     <ClInclude Include="TitleScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Scoreboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
@@ -77,6 +89,12 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scoreboardcpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -95,5 +113,19 @@
     <Image Include="Chili.ico">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sound Four.wav">
+      <Filter>Media</Filter>
+    </Media>
+    <Media Include="Sound One.wav">
+      <Filter>Media</Filter>
+    </Media>
+    <Media Include="Sound Three.wav">
+      <Filter>Media</Filter>
+    </Media>
+    <Media Include="Sound Two.wav">
+      <Filter>Media</Filter>
+    </Media>
   </ItemGroup>
 </Project>

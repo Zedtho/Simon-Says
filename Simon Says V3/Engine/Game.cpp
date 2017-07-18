@@ -29,7 +29,12 @@ Game::Game( MainWindow& wnd )
 	RedTopLeft(255, 0, 0, -150, -5, -5, -150),
 	BlueTopRight(0, 0, 255, +5, +150, -5, -150),
 	YellowBottomLeft(255, 255, 0, -150, -5, +150, +5),
-	GreenBottomRight(0, 255, 0, +5, +150, +150, +5)
+	GreenBottomRight(0, 255, 0, +5, +150, +150, +5),
+	RedButtonSound(L"Square One.wav"),
+	BlueButtonSound(L"Square Two.wav"),
+	YellowButtonSound(L"Square Three.wav"),
+	GreenButtonSound(L"Square Four.wav")
+
 {
 }
 
@@ -60,9 +65,15 @@ void Game::UpdateModel()
 	{
 		if (IsComputerTurn)
 		{
+			if (AfterGameOver)
+			{
+				scrbrd.Score = 0;
+				scrbrd.UpdateScoreboard();
+				AfterGameOver = false;
+			}
 			if (IsColorAdded == false)
 			{
-				srand(time(NULL));
+				srand(int(time(NULL)));
 				ColorPattern.push_back(rand() % 4 + 1);
 				IsColorAdded = true;
 			}
@@ -70,14 +81,14 @@ void Game::UpdateModel()
 			{
 
 				WhichColor(ColorPattern);
-				TimeOutForSetColor = 25;
+				TimeOutForSetColor = 15;
 				IndexForColorPattern++;
 				if (IndexForColorPattern == ColorPattern.size())
 				{
 					IsComputerTurn = false;
 					IsColorAdded = false;
 					IndexForColorPattern = 0;
-					TimeOutForSetColor = 30;
+					TimeOutForSetColor = 7;
 				}
 			}
 			RevertAllColorsToNormalSlowly(RedTopLeft, 1);
@@ -95,43 +106,55 @@ void Game::UpdateModel()
 				{
 					UserInput.push_back(1);
 					SetColor(RedTopLeft, 255, 150, 150);
-					TimeOutForSetColor = 7;
+					TimeOutForSetColor = 5;
+					RedButtonSound.Play();
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
 						ColorPattern.clear();
+						UserInput.clear();
+						AfterGameOver = true;
 					}
 				}
 				if (BlueTopRight.IsSelected(AxisX, AxisY, wnd) && TimeOutForSetColor == 0 )				{
 					UserInput.push_back(2);
 					SetColor(BlueTopRight, 150, 150, 255);
-					TimeOutForSetColor = 7;
+					TimeOutForSetColor = 5;
+					BlueButtonSound.Play();
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
 						ColorPattern.clear();
+						UserInput.clear();
+						AfterGameOver = true;
 					}
 				}
 				if (YellowBottomLeft.IsSelected(AxisX, AxisY, wnd) && TimeOutForSetColor == 0)
 				{
 					UserInput.push_back(3);
-					SetColor(YellowBottomLeft, 255, 255, 150);
-					TimeOutForSetColor = 7;
+					SetColor(YellowBottomLeft, 255, 255, 255);
+					TimeOutForSetColor = 5;
+					YellowButtonSound.Play();
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
 						ColorPattern.clear();
+						UserInput.clear();
+						AfterGameOver = true;
 					}
 				}
 				if (GreenBottomRight.IsSelected(AxisX, AxisY, wnd) && TimeOutForSetColor == 0)
 				{
 					UserInput.push_back(4);
 					SetColor(GreenBottomRight, 150, 255, 150);
-					TimeOutForSetColor = 7;
+					TimeOutForSetColor = 5;
+					GreenButtonSound.Play();
 					if (UserInput[UserInput.size() - 1] != ColorPattern[UserInput.size() - 1])
 					{
 						GameOver = true;
 						ColorPattern.clear();
+						UserInput.clear();
+						AfterGameOver = true;
 					}
 				}
 				
@@ -146,7 +169,9 @@ void Game::UpdateModel()
 			{
 				IsComputerTurn = true;
 				UserInput.clear();
-				TimeOutForSetColor = 60;
+				TimeOutForSetColor = 25;
+				scrbrd.Score = ColorPattern.size();
+				scrbrd.UpdateScoreboard();
 
 			}
 			
@@ -159,21 +184,25 @@ void Game::ComposeFrame()
 	if (GameOver)
 	{
 		brd.DrawTitleScreen(gfx);
+		
 	}
 	else
 	{
 		if (IsComputerTurn) {
 			brd.DrawWatch(gfx);
+			
 		}
 		else
 		{
 			brd.DrawRepeat(gfx);
+			
 		}
 		RedTopLeft.Draw(AxisX, AxisY, gfx);
 		BlueTopRight.Draw(AxisX, AxisY, gfx);
 		YellowBottomLeft.Draw(AxisX, AxisY, gfx);
 		GreenBottomRight.Draw(AxisX, AxisY, gfx);
 	}
+	scrbrd.Draw(Graphics::ScreenWidth - 60 , Graphics::ScreenHeight - 100, gfx);
 }
 
 void Game::SetColor(Square& Gold, int GivenRedV, int GivenGreenV, int GivenBlueV)
@@ -188,15 +217,25 @@ void Game::RevertAllColorsToNormalSlowly(Square& Gold, int WhichSquare)
 	switch (WhichSquare)
 	{
 	case 1:
-		if (Gold.GreenV > 5)
+		if (Gold.GreenV > 10)
 		{
 			Gold.GreenV--;
 			Gold.GreenV--;
 			Gold.GreenV--;
 			Gold.GreenV--;
 			Gold.GreenV--;
+			Gold.GreenV--;
+			Gold.GreenV--;
+			Gold.GreenV--;
+			Gold.GreenV--;
+			Gold.GreenV--;
 		}
-		if (Gold.BlueV  > 5) {
+		if (Gold.BlueV  > 10) {
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
 			Gold.BlueV--;
 			Gold.BlueV--;
 			Gold.BlueV--;
@@ -205,7 +244,12 @@ void Game::RevertAllColorsToNormalSlowly(Square& Gold, int WhichSquare)
 		}
 		break;
 	case 2:
-		if (Gold.RedV   > 5) {
+		if (Gold.RedV   > 10) {
+			Gold.RedV--;
+			Gold.RedV--;
+			Gold.RedV--;
+			Gold.RedV--;
+			Gold.RedV--;
 			Gold.RedV--;
 			Gold.RedV--;
 			Gold.RedV--;
@@ -214,8 +258,13 @@ void Game::RevertAllColorsToNormalSlowly(Square& Gold, int WhichSquare)
 
 
 		}
-		if (Gold.GreenV > 5)
+		if (Gold.GreenV > 10)
 		{
+			Gold.GreenV--;
+			Gold.GreenV--;
+			Gold.GreenV--;
+			Gold.GreenV--;
+			Gold.GreenV--;
 			Gold.GreenV--;
 			Gold.GreenV--;
 			Gold.GreenV--;
@@ -224,7 +273,19 @@ void Game::RevertAllColorsToNormalSlowly(Square& Gold, int WhichSquare)
 		}
 		break;
 	case 3:
-		if (Gold.BlueV  > 5) {
+		if (Gold.BlueV  > 17) {
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
 			Gold.BlueV--;
 			Gold.BlueV--;
 			Gold.BlueV--;
@@ -233,16 +294,25 @@ void Game::RevertAllColorsToNormalSlowly(Square& Gold, int WhichSquare)
 		}
 		break;
 	case 4:
-		if (Gold.RedV   > 5) {
+		if (Gold.RedV   > 10) {
 			Gold.RedV--;
 			Gold.RedV--;
 			Gold.RedV--;
 			Gold.RedV--;
 			Gold.RedV--;
-
+			Gold.RedV--;
+			Gold.RedV--;
+			Gold.RedV--;
+			Gold.RedV--;
+			Gold.RedV--;
 
 		}
-		if (Gold.BlueV  > 5) {
+		if (Gold.BlueV  > 10) {
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
+			Gold.BlueV--;
 			Gold.BlueV--;
 			Gold.BlueV--;
 			Gold.BlueV--;
@@ -259,15 +329,19 @@ void Game::WhichColor(std::vector<int> ColorPattern)
 	{
 		case 1:
 			SetColor(RedTopLeft, 255, 150, 150);
+			RedButtonSound.Play();
 			break;
 		case 2:
 			SetColor(BlueTopRight, 150, 150, 255);
+			BlueButtonSound.Play();
 			break;
 		case 3:
-			SetColor(YellowBottomLeft, 255, 255, 150);
+			SetColor(YellowBottomLeft, 255, 255, 255);
+			YellowButtonSound.Play();
 			break;
 		case 4:
 			SetColor(GreenBottomRight, 150, 255, 150);
+			GreenButtonSound.Play();
 			break;
 
 	}		

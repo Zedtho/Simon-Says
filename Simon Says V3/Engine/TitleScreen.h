@@ -5,8 +5,8 @@ class DrawingBoard
 public:
 	void DrawTitleScreen(Graphics& gfx)
 	{
-		int x = 200;
-		int y = 200;
+		int x = int(Graphics::ScreenWidth/2 - 200);
+		int y = int(Graphics::ScreenHeight/2 - 100);
 		gfx.PutPixel(15 + x, 15 + y, 255, 255, 255);
 		gfx.PutPixel(16 + x, 15 + y, 255, 255, 255);
 		gfx.PutPixel(17 + x, 15 + y, 255, 255, 255);
@@ -12138,8 +12138,8 @@ public:
 	}
 	void DrawRepeat(Graphics& gfx)
 	{
-		int x = 327;
-		int y = 50;
+		int x = int(Graphics::ScreenWidth/2 - 73);
+		int y = int(Graphics::ScreenHeight/2 - 250);
 		gfx.PutPixel(2 + x, 3 + y, 255, 255, 255);
 		gfx.PutPixel(3 + x, 3 + y, 255, 255, 255);
 		gfx.PutPixel(4 + x, 3 + y, 255, 255, 255);
@@ -15279,8 +15279,8 @@ public:
 
 	}
 	void DrawWatch(Graphics& gfx) {
-		int x = 327;
-		int y = 50;
+		int x = int(Graphics::ScreenWidth/2 - 73);
+		int y = int(Graphics::ScreenHeight/2 - 250);
 		gfx.PutPixel(2 + x, 3 + y, 255, 255, 255);
 		gfx.PutPixel(3 + x, 3 + y, 255, 255, 255);
 		gfx.PutPixel(4 + x, 3 + y, 255, 255, 255);

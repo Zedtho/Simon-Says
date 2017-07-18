@@ -146,6 +146,9 @@
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scoreboard.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="SoundEffect.h" />
     <ClInclude Include="Squares.h" />
     <ClInclude Include="TitleScreen.h" />
   </ItemGroup>
@@ -157,6 +160,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Scoreboardcpp.cpp" />
+    <ClCompile Include="Sound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FramebufferPS.hlsl">
@@ -225,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Chili.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Sound Four.wav" />
+    <Media Include="Sound One.wav" />
+    <Media Include="Sound Three.wav" />
+    <Media Include="Sound Two.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
